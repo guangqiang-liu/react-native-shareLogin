@@ -1,10 +1,13 @@
 # react-native-ShareAndLogin
 
 # 前言
-> 移动端开发中，分享功能基本上是每一个app上必备的功能。对于原生app来说，我们接入分享功能也不算复杂，直接接入三方的友盟sdk，只需要几步就能搞定。但是对于RN开发就稍微麻烦些，因为很多三方的平台暂不提供ReactNative的sdk，这时我们就需要在原生的基础之上再进行封装，然后提供接口给RN调用。下面介绍的就是基于此方案在RN工程汇中集成分享。
+> 移动端开发中，分享登录功能基本上是每一个app上必备的功能。对于原生app来说，我们接入分享登录功能也不算复杂，直接接入三方的友盟sdk，只需要几步就能搞定。但是对于RN开发就稍微麻烦些，因为很多三方的平台暂不提供ReactNative的sdk，这时我们就需要在原生的基础之上再进行封装，然后提供接口给RN调用。下面介绍的就是基于此方案在RN工程汇中集成分享登录。
 
 # 效果图
 ![img](http://upload-images.jianshu.io/upload_images/6342050-62c239f951cef0fb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+# 注意
+**因为三方登录所添加的SDK和分享功能相同，我们只需要配置一种功能的SDK即可，本Demo示例是以配置分享功能为例。要想支持三方登录功能，我们不需要在单独的配置SDK环境，只需要添加LoginModule即可**
 
 # 本套教程使用的SDK版本号：v6.4.5
 
@@ -17,7 +20,7 @@
 > 	* 如果是从6.x版本升级上来的开发者，可以直接替换对应的库文件即可，在API上我们做了最大兼容，基本不影响旧版开发者升级使用，从5.x或者4.x版本升级上来的开发者，注意要将旧版本库文件、资源文件删掉后再进行集成，避免引起冲突等问题
 
 
-# 分享平台
+# 分享登录平台
 * 微信
 * 朋友圈
 * QQ
@@ -229,10 +232,15 @@ libz.tbd
 
 # 3. 将Demo工程中ReactNativeModule文件拖到自己的工程
 
+***注意：ReactNativeModule 文件中包含分享module和登录module两个模块***
+
 ![module](http://upload-images.jianshu.io/upload_images/6342050-2bf52c57c662840b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 # Android
+
+## 注意：
+**Android平台的分享和登录功能相关的函数回调略有不同，后面同学需要注意。**
 
 # 1. SDK集成与配置
 
@@ -328,6 +336,9 @@ libz.tbd
 
 ## 1.3 配置签名
 * 生成签名文件
+
+**如何生成签名文件请查看：[http://www.jianshu.com/p/b28a5be05029](http://www.jianshu.com/p/b28a5be05029)**
+
 * 在gradle.properties文件下，添加签名信息，直接拷贝代码
 
 ```
@@ -387,7 +398,7 @@ public void onCreate() {
 }
 ```
 
-### 1.4.2 初始化分享回调
+### 1.4.2 初始化回调
 * 在MainActivity中初始化分享回调，直接拷贝代码
 
 ```
@@ -401,5 +412,6 @@ public void onCreate() {
 # 注意事项
 * 添加 `apshare ` `moduel ` `wxapi` `WBShareActivity ` 这几个文件时，注意导入的包名是否和工程包名一致
 * 签名文件最好放在app目录下
+* iOS和Android导出模块的模块名和函数名一致
 
 # 总结
