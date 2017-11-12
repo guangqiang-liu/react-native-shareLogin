@@ -10,10 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by Song on 2017/7/10.
- */
-
 public class SharePackage implements ReactPackage {
 
     @Override

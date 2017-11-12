@@ -35,6 +35,8 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+        <!-- 从这开始复制 -->
+
         <!-- 新浪 -->
         <activity
             android:name=".WBShareActivity"
@@ -90,8 +92,10 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="59644771f5ade43aec001c24" >
+            android:value="5126ff896c738f2bfa000438" >
         </meta-data>
+        <!-- 到这里结束复制 -->
+
     </application>
 
 </manifest>

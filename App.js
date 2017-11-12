@@ -6,47 +6,40 @@
 
 import React, { Component } from 'react'
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
-  NativeModules
+  TouchableOpacity
 } from 'react-native'
 
-import UShare from './share/share'
-import SharePlatform from './share/SharePlatform'
+import {ShareModal} from './shareModal'
 
 export default class ReactNativeShare extends Component {
 
-  /**
-   * 参数说明：
-   * 1. 标题
-   * 2. 内容
-   * 3. 跳转链接
-   * 4. 图片链接
-   * 5. 分享平台
-   * 6. 分享结果回调
-   */
-  _share() {
-    UShare.share('标题','内容',
-      'http://baidu.com','http://dev.umeng.com/images/tab2_1.png', SharePlatform.QQ,
-      (message) => {
-        // message:
-        // 分享成功
-        // 分享失败
-        // 取消分享
-        alert(message)
-      })
+  constructor(props) {
+    super(props)
+    this.state = {
+      modalVisible: false
+    }
+  }
+
+  openShare() {
+    this.setState({modalVisible: true})
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome} onPress={this._share.bind(this)}>
-          分享
-        </Text>
+        <TouchableOpacity style={styles.share} onPress={() => this.openShare()}>
+          <Text>封装分享功能组件</Text>
+        </TouchableOpacity>
+        <ShareModal
+          visible={this.state.modalVisible}
+          onVisibleChange={(modalVisible) => this.setState({
+            modalVisible: modalVisible
+          })}/>
       </View>
-    );
+    )
   }
 }
 
@@ -57,14 +50,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  share: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })

@@ -19,9 +19,6 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 
-/**
- * Created by Song on 2017/7/10.
- */
 public class ShareModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
     private Context context;
