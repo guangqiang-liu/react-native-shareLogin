@@ -6,6 +6,7 @@ import {commonStyle} from '../commonStyle'
 import {View, TouchableOpacity, Text, StyleSheet, Modal, NativeModules, Dimensions, Image} from 'react-native'
 
 const ShareModule = NativeModules.ShareModule
+const LoginModule = NativeModules.LoginModule
 
 const deviceWidth = Dimensions.get('window').width
 
@@ -30,21 +31,36 @@ class ShareModal extends Component {
   share(platform) {
     ShareModule.share('OneM','OneM',
       'http://www.jianshu.com/u/023338566ca5', 'http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg', SharePlatform[platform],
-      (message) => {
-        // message:
-        // 分享成功
-        // 分享失败
-        // 取消分享
+      (response) => {
         this.props.onVisibleChange && this.props.onVisibleChange(false)
         this.setState({isHidden: true})
       })
+  }
+
+  login() {
+    LoginModule.login(SharePlatform[platform], (response) => {
+      /**
+       * response
+       * 授权数据
+       * uid
+       * openid
+       * accessToken
+       * expiration
+       * 用户数据
+       * name
+       * iconurl
+       * unionGender
+       */
+      this.props.onVisibleChange && this.props.onVisibleChange(false)
+      this.setState({isHidden: true})
+    })
   }
 
   renderItem(img, title, platform) {
     return (
       <TouchableOpacity
         style={styles.item}
-        onPress={() => this.share(platform)}>
+        onPress={() => this.props.funcType === 'share' ? this.share(platform) : this.login(platform)}>
         <Image style={{width: 40, height: 40}} source={img} resizeMode={'center'}/>
         <Text style={styles.text}>{title}</Text>
       </TouchableOpacity>

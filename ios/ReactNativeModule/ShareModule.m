@@ -52,9 +52,6 @@ RCT_EXPORT_METHOD(share:(NSString *) title
     case 4:
       type = UMSocialPlatformType_Qzone;
       break;
-    case 5:
-      type = UMSocialPlatformType_Facebook;
-      break;
     default:
       break;
   }
@@ -63,14 +60,43 @@ RCT_EXPORT_METHOD(share:(NSString *) title
   dispatch_async(dispatch_get_main_queue(), ^{
     
     [[UMSocialManager defaultManager] shareToPlatform:type messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
-      NSString *message = @"分享成功!";
+      NSString *response = @"分享成功";
       if (error) {
+        
         UMSocialLogInfo(@"************Share fail with error %@*********",error);
-        if(error.code == 2009) {
-          message = @"取消分享!";
-        } else {
-          message = @"分享失败!";
+        
+        if(error.code == UMSocialPlatformErrorType_Unknow) {
+          response = @"未知错误";
+        } else if (error.code == UMSocialPlatformErrorType_NotSupport) {
+          response = @" 不支持（url scheme 没配置，或者没有配置-ObjC， 或则SDK版本不支持或则客户端版本不支持）";
+        }  else if (error.code == UMSocialPlatformErrorType_AuthorizeFailed) {
+          response = @"授权失败";
+        } else if (error.code == UMSocialPlatformErrorType_ShareFailed) {
+          response = @"分享失败";
+        } else if (error.code == UMSocialPlatformErrorType_CheckUrlSchemaFail) {
+          response = @"请求用户信息失败";
+        } else if (error.code == UMSocialPlatformErrorType_ShareDataNil) {
+          response = @"分享内容为空";
+        } else if (error.code == UMSocialPlatformErrorType_ShareDataTypeIllegal) {
+          response = @"分享内容不支持";
+        } else if (error.code == UMSocialPlatformErrorType_CheckUrlSchemaFail) {
+          response = @"schemaurl fail";
+        } else if (error.code == UMSocialPlatformErrorType_NotInstall) {
+          response = @"应用未安装";
+        } else if (error.code == UMSocialPlatformErrorType_Cancel) {
+          response = @"取消操作";
+        } else if (error.code == UMSocialPlatformErrorType_NotNetWork) {
+          response = @"网络异常";
+        } else if (error.code == UMSocialPlatformErrorType_SourceError) {
+          response = @"第三方错误";
+        } else if (error.code == UMSocialPlatformErrorType_ProtocolNotOverride) {
+          response = @"对应的UMSocialPlatformProvider的方法没有实现";
+        } else if (error.code == UMSocialPlatformErrorType_NotUsingHttps) {
+          response = @"没有用https的请求,@see UMSocialGlobal isUsingHttpsWhenShareContent";
         }
+        
+        UMSocialLogInfo(@"response result %@", response);
+
       } else {
         if ([data isKindOfClass:[UMSocialShareResponse class]]) {
           UMSocialShareResponse *resp = data;
@@ -82,7 +108,9 @@ RCT_EXPORT_METHOD(share:(NSString *) title
           UMSocialLogInfo(@"response data is %@",data);
         }
       }
-      callback([[NSArray alloc] initWithObjects:message, nil]);
+      
+      callback([[NSArray alloc] initWithObjects:response, nil]);
+      
     }];
   });
 }

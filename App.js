@@ -19,12 +19,17 @@ export default class ReactNativeShare extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalVisible: false
+      modalVisible: false,
+      funcType: 'share'
     }
   }
 
   openShare() {
-    this.setState({modalVisible: true})
+    this.setState({modalVisible: true, funcType: 'share'})
+  }
+
+  openLogin() {
+    this.setState({modalVisible: true, funcType: 'login'})
   }
 
   render() {
@@ -33,8 +38,12 @@ export default class ReactNativeShare extends Component {
         <TouchableOpacity style={styles.share} onPress={() => this.openShare()}>
           <Text>封装分享功能组件</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.share} onPress={() => this.openLogin()}>
+          <Text>封装登录功能组件</Text>
+        </TouchableOpacity>
         <ShareModal
           visible={this.state.modalVisible}
+          funcType={this.state.funcType}
           onVisibleChange={(modalVisible) => this.setState({
             modalVisible: modalVisible
           })}/>
@@ -55,6 +64,7 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: 'red',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 20
   }
 })
