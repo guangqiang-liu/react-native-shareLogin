@@ -59,8 +59,8 @@
 		8D0424231FA386B000221603 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0424221FA386B000221603 /* libsqlite3.tbd */; };
 		8D0424251FA386C000221603 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0424241FA386C000221603 /* libc++.tbd */; };
 		8D0424271FA386CA00221603 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D0424261FA386CA00221603 /* libz.tbd */; };
-		8D8BFFB91FB7597C00BE14F3 /* ShareModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8BFFB81FB7597C00BE14F3 /* ShareModule.m */; };
-		8D8BFFE91FB847B000BE14F3 /* LoginModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8BFFE81FB847B000BE14F3 /* LoginModule.m */; };
+		8DA2C3581FBB3535002D1442 /* loginModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2C3551FBB3535002D1442 /* loginModule.m */; };
+		8DA2C3591FBB3535002D1442 /* shareModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2C3571FBB3535002D1442 /* shareModule.m */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 /* End PBXBuildFile section */
 
@@ -366,10 +366,10 @@
 		8D0424221FA386B000221603 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		8D0424241FA386C000221603 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8D0424261FA386CA00221603 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		8D8BFFB71FB7597C00BE14F3 /* ShareModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareModule.h; sourceTree = "<group>"; };
-		8D8BFFB81FB7597C00BE14F3 /* ShareModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareModule.m; sourceTree = "<group>"; };
-		8D8BFFE71FB847B000BE14F3 /* LoginModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModule.h; sourceTree = "<group>"; };
-		8D8BFFE81FB847B000BE14F3 /* LoginModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModule.m; sourceTree = "<group>"; };
+		8DA2C3541FBB3535002D1442 /* loginModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginModule.h; sourceTree = "<group>"; };
+		8DA2C3551FBB3535002D1442 /* loginModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginModule.m; sourceTree = "<group>"; };
+		8DA2C3561FBB3535002D1442 /* shareModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareModule.h; sourceTree = "<group>"; };
+		8DA2C3571FBB3535002D1442 /* shareModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareModule.m; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -751,10 +751,10 @@
 		8DDE1F5E1FB5D81B009E52A6 /* ReactNativeModule */ = {
 			isa = PBXGroup;
 			children = (
-				8D8BFFB71FB7597C00BE14F3 /* ShareModule.h */,
-				8D8BFFB81FB7597C00BE14F3 /* ShareModule.m */,
-				8D8BFFE71FB847B000BE14F3 /* LoginModule.h */,
-				8D8BFFE81FB847B000BE14F3 /* LoginModule.m */,
+				8DA2C3541FBB3535002D1442 /* loginModule.h */,
+				8DA2C3551FBB3535002D1442 /* loginModule.m */,
+				8DA2C3561FBB3535002D1442 /* shareModule.h */,
+				8DA2C3571FBB3535002D1442 /* shareModule.m */,
 			);
 			path = ReactNativeModule;
 			sourceTree = "<group>";
@@ -1257,9 +1257,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				8D8BFFB91FB7597C00BE14F3 /* ShareModule.m in Sources */,
+				8DA2C3591FBB3535002D1442 /* shareModule.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				8D8BFFE91FB847B000BE14F3 /* LoginModule.m in Sources */,
+				8DA2C3581FBB3535002D1442 /* loginModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

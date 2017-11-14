@@ -1,16 +1,16 @@
 //
-//  ShareModule.m
+//  shareModule.m
 //  RNShareDemo
 //
-//  Created by 刘光强 on 2017/11/12.
+//  Created by 刘光强 on 2017/11/14.
 //  Copyright © 2017年 Facebook. All rights reserved.
 //
 
-#import "ShareModule.h"
+#import "shareModule.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import <UMSocialCore/UMSocialManager.h>
 
-@implementation ShareModule
+@implementation shareModule
 
 RCT_EXPORT_MODULE()
 
@@ -96,7 +96,7 @@ RCT_EXPORT_METHOD(share:(NSString *) title
         }
         
         UMSocialLogInfo(@"response result %@", response);
-
+        
       } else {
         if ([data isKindOfClass:[UMSocialShareResponse class]]) {
           UMSocialShareResponse *resp = data;

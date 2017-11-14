@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 
+import com.rnsharedemo.module.LoginModule;
 import com.rnsharedemo.module.ShareModule;
 import com.umeng.socialize.UMShareAPI;
 
@@ -23,6 +24,7 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ShareModule.initActivity(this);
+        LoginModule.initActivity(this);
     }
 
     @Override

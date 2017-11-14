@@ -3,15 +3,12 @@ package com.rnsharedemo.module;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Looper;
 
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableArray;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -23,7 +20,6 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
 
     private Context context;
     private static Activity mActivity;
-    private static Handler mHandler = new Handler(Looper.getMainLooper());
 
     public static void initActivity(Activity activity) {
         mActivity = activity;
@@ -34,66 +30,47 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
         this.context = reactContext;
     }
 
-    private static void runOnMainThread(Runnable task) {
-        mHandler.post(task);
-    }
-
     @Override
     public String getName() {
-        return "sharemodule";
+        return "shareModule";
     }
 
-    /**
-     * 分享链接
-     * @param title
-     * @param description
-     * @param contentUrl
-     * @param imgUrl
-     * @param platform
-     * @param resultCallback
-     */
     @ReactMethod
     public void share(String title, String description,
-                          String contentUrl, String imgUrl,final int platform,
+                      String contentUrl, String imgUrl, final int platform,
                       final Callback resultCallback) {
 
         final UMWeb web = new UMWeb(contentUrl);
-        web.setTitle(title); //标题
-        web.setThumb(new UMImage(context, imgUrl));  //缩略图
-        web.setDescription(description); //描述
-        runOnMainThread(new Runnable() {
-            @Override
-            public void run() {
-                new ShareAction(mActivity)
-                        .setPlatform(getSharePlatform(platform))
-                        .withMedia(web) // 分享链接
-                        .setCallback(new UMShareListener() {
-                            @Override
-                            public void onStart(SHARE_MEDIA share_media) {
-                                //分享开始的回调
-                            }
+        web.setTitle(title);
+        web.setThumb(new UMImage(context, imgUrl));
+        web.setDescription(description);
+        new ShareAction(mActivity)
+                .setPlatform(getSharePlatform(platform))
+                .withMedia(web)
+                .setCallback(new UMShareListener() {
+                    @Override
+                    public void onStart(SHARE_MEDIA share_media) {
+                    }
 
-                            @Override
-                            public void onResult(SHARE_MEDIA share_media) {
-                                resultCallback.invoke("分享成功");
-                            }
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+                        resultCallback.invoke("分享成功");
+                    }
 
-                            @Override
-                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                                resultCallback.invoke("分享失败：" + throwable.getMessage());
-                            }
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                        resultCallback.invoke("分享失败：" + throwable.getMessage());
+                    }
 
-                            @Override
-                            public void onCancel(SHARE_MEDIA share_media) {
-                                resultCallback.invoke("取消分享");
-                            }
-                        })
-                        .share();
-            }
-        });
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+                        resultCallback.invoke("取消分享");
+                    }
+                })
+                .share();
     }
 
-    private SHARE_MEDIA getSharePlatform(int platform){
+    private SHARE_MEDIA getSharePlatform(int platform) {
         switch (platform) {
             case 0:
                 return SHARE_MEDIA.QQ;

@@ -5,8 +5,8 @@ import React, {Component} from 'react'
 import {commonStyle} from '../commonStyle'
 import {View, TouchableOpacity, Text, StyleSheet, Modal, NativeModules, Dimensions, Image} from 'react-native'
 
-const ShareModule = NativeModules.ShareModule
-const LoginModule = NativeModules.LoginModule
+const ShareModule = NativeModules.shareModule
+const LoginModule = NativeModules.loginModule
 
 const deviceWidth = Dimensions.get('window').width
 
@@ -37,7 +37,7 @@ class ShareModal extends Component {
       })
   }
 
-  login() {
+  login(platform) {
     LoginModule.login(SharePlatform[platform], (response) => {
       /**
        * response

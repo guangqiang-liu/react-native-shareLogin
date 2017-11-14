@@ -1,23 +1,23 @@
 //
-//  LoginModule.m
+//  loginModule.m
 //  RNShareDemo
 //
-//  Created by 刘光强 on 2017/11/12.
+//  Created by 刘光强 on 2017/11/14.
 //  Copyright © 2017年 Facebook. All rights reserved.
 //
 
-#import "LoginModule.h"
+#import "loginModule.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import <UMSocialCore/UMSocialManager.h>
 
-@implementation LoginModule
+@implementation loginModule
 
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(login:(NSInteger) platform callback:(RCTResponseSenderBlock) callback) {
   
   UMSocialPlatformType type = UMSocialPlatformType_Sina ;
-    
+  
   switch (platform) {
     case 0:
       type = UMSocialPlatformType_QQ;
@@ -46,7 +46,7 @@ RCT_EXPORT_METHOD(login:(NSInteger) platform callback:(RCTResponseSenderBlock) c
         UMSocialLogInfo(@"************Share fail with error %@*********", error);
         
         if(error.code == UMSocialPlatformErrorType_Unknow) {
-           response = @"未知错误";
+          response = @"未知错误";
         } else if (error.code == UMSocialPlatformErrorType_NotSupport) {
           response = @" 不支持（url scheme 没配置，或者没有配置-ObjC， 或则SDK版本不支持或则客户端版本不支持）";
         }  else if (error.code == UMSocialPlatformErrorType_AuthorizeFailed) {
