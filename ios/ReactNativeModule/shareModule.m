@@ -110,7 +110,6 @@ RCT_EXPORT_METHOD(share:(NSString *) title
       }
       
       callback([[NSArray alloc] initWithObjects:response, nil]);
-      
     }];
   });
 }

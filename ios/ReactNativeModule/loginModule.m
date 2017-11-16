@@ -89,7 +89,6 @@ RCT_EXPORT_METHOD(login:(NSInteger) platform callback:(RCTResponseSenderBlock) c
         NSLog(@"Sina originalResponse: %@", resp.originalResponse);
         
         callback([[NSArray alloc] initWithObjects:resp.originalResponse, nil]);
-        
       }
     }];
   });
